@@ -65,6 +65,9 @@ const store = new Vuex.Store({
         previa.dt_cadastro = dataProcessada.toLocaleDateString() +
           " - " +
           dataProcessada.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+        // Visualizar
+        previa.acoes = ''
       });
 
       // Salvando no State
