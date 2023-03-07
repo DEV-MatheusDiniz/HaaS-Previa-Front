@@ -69,24 +69,16 @@ export default {
   },
 
   computed: {
-    ...mapState(["previas"]),
+    ...mapState([
+      "previas",
+      "headers",
+      "search"
+    ]),
   },
 
   data() {
     return {
       search: "",
-
-      headers: [
-        { text: "Código", value: "id" },
-        { text: "Regra de Faturamento", value: "bo_regra_cobranca" },
-        { text: "Dia/Mês de Referência", value: "dt_mes_referencia" },
-        { text: "Qtd. ICs Contabilizados ", value: "qt_contabilizado" },
-        { text: "Vlr. Total em USs", value: "vl_total_grupo" },
-        { text: "Vlr. Total Mensal", value: "vl_total_mensal" },
-        { text: "Dt. Processada", value: "dt_cadastro" },
-        { text: "Ações", value: "acoes" }
-      ],
-
       getRegraCobranca: 'item.bo_regra_cobranca',
       getMesReferencia: 'item.dt_mes_referencia',
       getAcoes: 'item.acoes'
@@ -94,7 +86,9 @@ export default {
   },
 
   methods: {
-    ...mapActions(["getPreviasAction"]),
+    ...mapActions([
+      "getPreviasAction",
+    ]),
 
     getCorRegraCobranca(regraCobranca) {
       if (regraCobranca == "APLICADA") return "orange";

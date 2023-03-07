@@ -8,6 +8,17 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {
     previas: [],
+
+    headers: [
+      { text: "Código", value: "id" },
+      { text: "Regra de Faturamento", value: "bo_regra_cobranca" },
+      { text: "Dia/Mês de Referência", value: "dt_mes_referencia" },
+      { text: "Qtd. ICs Contabilizados ", value: "qt_contabilizado" },
+      { text: "Vlr. Total em USs", value: "vl_total_grupo" },
+      { text: "Vlr. Total Mensal", value: "vl_total_mensal" },
+      { text: "Dt. Processada", value: "dt_cadastro" },
+      { text: "Ações", value: "acoes" }
+    ],
   },
 
   actions: {
@@ -22,16 +33,6 @@ const store = new Vuex.Store({
         });
     },
 
-    postPreviaAction({ commit, novaPrevia }) {
-      api
-        .post('faturamentos/', novaPrevia)
-        .then((response) => {
-          commit('postPreviaMutation', response.data)
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
   },
 
   mutations: {
