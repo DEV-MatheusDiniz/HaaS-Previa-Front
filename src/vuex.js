@@ -9,16 +9,11 @@ const store = new Vuex.Store({
   state: {
     previas: [],
 
-    headers: [
-      { text: "Código", value: "id" },
-      { text: "Regra de Faturamento", value: "bo_regra_cobranca" },
-      { text: "Dia/Mês de Referência", value: "dt_mes_referencia" },
-      { text: "Qtd. ICs Contabilizados ", value: "qt_contabilizado" },
-      { text: "Vlr. Total em USs", value: "vl_total_grupo" },
-      { text: "Vlr. Total Mensal", value: "vl_total_mensal" },
-      { text: "Dt. Processada", value: "dt_cadastro" },
-      { text: "Ações", value: "acoes" }
-    ],
+    previa: [],
+
+    getRegraCobranca: "item.bo_regra_cobranca",
+    getMesReferencia: "item.dt_mes_referencia",
+    getAcoes: "item.acoes"
   },
 
   actions: {
@@ -33,6 +28,9 @@ const store = new Vuex.Store({
         });
     },
 
+    getPreviaAction({ commit }, id) {
+      commit('getPreviaMutation', id)
+    },
   },
 
   mutations: {
@@ -68,13 +66,18 @@ const store = new Vuex.Store({
           dataProcessada.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
         // Visualizar
-        previa.acoes = ''
+        previa.acoes = previa.id
       });
 
       // Salvando no State
       state.previas = previas;
     },
+
+    getPreviaMutation(state, id) {
+      state.previa = state.previas.filter(previa => previa.id == id)
+    }
   },
+  
 });
 
 export { store };

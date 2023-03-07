@@ -44,10 +44,11 @@
       </template><!-- /Dia/Mês de Referência -->
 
       <!-- Ações -->
-      <template v-slot:[getAcoes]>
+      <template v-slot:[getAcoes]="{ item }">
         <router-link to="/previa">
           <v-icon
             small
+            @click="getPreviaAction(item.id)"
           >
             mdi-eye
           </v-icon>
@@ -59,46 +60,62 @@
 </template>
 
 <script>
+import { RouterLink } from "vue-router";
 import { mapState, mapActions } from "vuex";
 
 export default {
-  name: "PreviasComp",
+    name: "PreviasComp",
 
-  mounted() {
-    this.getPreviasAction();
-  },
+    components: { RouterLink },
 
-  computed: {
-    ...mapState([
-      "previas",
-      "headers",
-      "search"
-    ]),
-  },
-
-  data() {
-    return {
-      search: "",
-      getRegraCobranca: 'item.bo_regra_cobranca',
-      getMesReferencia: 'item.dt_mes_referencia',
-      getAcoes: 'item.acoes'
-    };
-  },
-
-  methods: {
-    ...mapActions([
-      "getPreviasAction",
-    ]),
-
-    getCorRegraCobranca(regraCobranca) {
-      if (regraCobranca == "APLICADA") return "orange";
-      else if (regraCobranca == "NÃO APLICADA") return "grey";
+    mounted() {
+      this.getPreviasAction();
     },
 
-    getCorMesReferencia(bo_diario) {
-      if (bo_diario) return "grey";
-      else return "black";
-    }
-  },
+    data() {
+        return {
+            search: "",
+
+            headers: [
+              { text: "Código", value: "id" },
+              { text: "Regra de Faturamento", value: "bo_regra_cobranca" },
+              { text: "Dia/Mês de Referência", value: "dt_mes_referencia" },
+              { text: "Qtd. ICs Contabilizados ", value: "qt_contabilizado" },
+              { text: "Vlr. Total em USs", value: "vl_total_grupo" },
+              { text: "Vlr. Total Mensal", value: "vl_total_mensal" },
+              { text: "Dt. Processada", value: "dt_cadastro" },
+              { text: "Ações", value: "acoes" }
+            ],
+        };
+    },
+
+    computed: {
+      ...mapState([
+          "previas",
+          "getRegraCobranca",
+          "getMesReferencia",
+          "getAcoes"
+      ]),
+    },
+
+    methods: {
+        ...mapActions([
+            "getPreviasAction",
+            "getPreviaAction",
+        ]),
+        getCorRegraCobranca(regraCobranca) {
+            if (regraCobranca == "APLICADA")
+                return "orange";
+            else if (regraCobranca == "NÃO APLICADA")
+                return "grey";
+        },
+        getCorMesReferencia(bo_diario) {
+            if (bo_diario)
+                return "grey";
+            else
+                return "black";
+        }
+    },
+
 };
 </script>
