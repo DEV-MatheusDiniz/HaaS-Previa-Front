@@ -20,7 +20,7 @@
     </v-card-title><!-- /Titulo da tabela -->
 
     <!-- Body da tabela -->
-    <v-data-table :headers="headers" :items="previas" :search="search">
+    <v-data-table :headers="getHeadersFaturamento" :items="previas" :search="search">
       <!-- Regra Cobranca -->
       <template v-slot:[getRegraCobranca]="{ item }">
         <v-btn
@@ -48,7 +48,7 @@
         <router-link to="/previa">
           <v-icon
             small
-            @click="getPreviaAction(item.id)"
+            @click="previaAction(item.id)"
           >
             mdi-eye
           </v-icon>
@@ -61,47 +61,41 @@
 
 <script>
 import { RouterLink } from "vue-router";
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapGetters } from "vuex";
 
 export default {
     name: "PreviasComp",
 
-    components: { RouterLink },
+    components: { 
+      RouterLink
+    },
 
     mounted() {
-      this.getPreviasAction();
+      this.previasAction();
     },
 
     data() {
         return {
             search: "",
-
-            headers: [
-              { text: "Código", value: "id" },
-              { text: "Regra de Faturamento", value: "bo_regra_cobranca" },
-              { text: "Dia/Mês de Referência", value: "dt_mes_referencia" },
-              { text: "Qtd. ICs Contabilizados ", value: "qt_contabilizado" },
-              { text: "Vlr. Total em USs", value: "vl_total_grupo" },
-              { text: "Vlr. Total Mensal", value: "vl_total_mensal" },
-              { text: "Dt. Processada", value: "dt_cadastro" },
-              { text: "Ações", value: "acoes" }
-            ],
         };
     },
 
     computed: {
-      ...mapState([
-          "previas",
-          "getRegraCobranca",
-          "getMesReferencia",
-          "getAcoes"
-      ]),
+      ...mapState([ "previas" ]),
+
+      ...mapGetters([
+        "getHeadersFaturamento",
+        "getPrevias",
+        "getRegraCobranca",
+        "getMesReferencia",
+        "getAcoes"
+      ])
     },
 
     methods: {
         ...mapActions([
-            "getPreviasAction",
-            "getPreviaAction",
+            "previasAction",
+            "previaAction",
         ]),
         getCorRegraCobranca(regraCobranca) {
             if (regraCobranca == "APLICADA")
