@@ -3,7 +3,7 @@
         <!-- Tabela Faturamento -->
         <v-card>
             <!-- Titulo da tabela -->
-            <v-card-title>
+            <v-card-title class="header-grey">
                 Previa: {{ getPrevia[0].id }}
     
                 <v-spacer></v-spacer>
@@ -13,11 +13,13 @@
                     to="/"
                 >
                     Voltar
+                    <v-icon>mdi-undo-variant</v-icon>
                 </v-btn>
             </v-card-title><!-- /Titulo da tabela -->
     
             <!-- Body da tabela -->
             <v-data-table
+                class="estilo-zebra"
                 :headers="getHeadersFaturamentoSemAcoes"
                 :items="getPrevia"
                 :hide-default-footer="true"
@@ -52,7 +54,7 @@
         <!-- Tabela Faturamento Item -->
         <v-card>
             <!-- Titulo da tabela -->
-            <v-card-title>
+            <v-card-title class="header-grey">
                 Itens Faturados
 
                 <v-spacer></v-spacer>
@@ -73,12 +75,13 @@
     
             <!-- Body da tabela -->
             <v-data-table
+                class="estilo-zebra"
                 :search="search"
                 :headers="getHeadersFaturamentoItem"
                 :items="faturamentosItem"
                 :sort-by="'item_configuracao'"
             >
-        </v-data-table><!-- /Body da tabela -->
+            </v-data-table><!-- /Body da tabela -->
         </v-card>
     </div>
 </template>
@@ -124,12 +127,3 @@ export default {
 
 }
 </script>
-
-<style scoped>
-.v-card {
-    background-color: grey;
-    color: white;
-}
-
-
-</style>

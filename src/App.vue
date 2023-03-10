@@ -25,3 +25,18 @@ export default {
   },
 };
 </script>
+
+<style>
+.header-grey {
+  background-color: grey;
+  color: white;
+}
+
+.estilo-zebra tbody tr:nth-child(2n){
+  background-color: #b2b2b2;
+}
+
+a {
+  text-decoration: none;
+}
+</style>

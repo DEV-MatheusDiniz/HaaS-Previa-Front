@@ -1,12 +1,13 @@
 <template>
   <v-card>
     <!-- Titulo da tabela -->
-    <v-card-title>
-      Previa: {{ previas.length }}
+    <v-card-title class="header-grey">
+      Previas: {{ previas.length }}
 
       <v-spacer></v-spacer>
 
       <v-text-field
+        dark
         v-model="search"
         append-icon="mdi-magnify"
         label="Buscar"
@@ -20,7 +21,12 @@
     </v-card-title><!-- /Titulo da tabela -->
 
     <!-- Body da tabela -->
-    <v-data-table :headers="getHeadersFaturamento" :items="previas" :search="search">
+    <v-data-table
+      class="estilo-zebra"
+      :headers="getHeadersFaturamento"
+      :items="previas"
+      :search="search"
+    >
       <!-- Regra Cobranca -->
       <template v-slot:[getRegraCobranca]="{ item }">
         <v-btn
