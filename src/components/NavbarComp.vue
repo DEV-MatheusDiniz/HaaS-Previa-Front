@@ -1,16 +1,18 @@
 <template>
   <v-app-bar app color="dark" dark>
     <div class="d-flex align-center">
-      <v-img
-        alt="HaaS Logo"
-        class="shrink mr-2"
-        contain
-        src="@/assets/login_logo.png"
-        transition="scale-transition"
-        width="40"
-      />
+      <router-link to="/">
+        <v-img
+          alt="HaaS Logo"
+          class="shrink mr-2"
+          contain
+          src="@/assets/login_logo.png"
+          transition="scale-transition"
+           width="40"
+        />
+      </router-link>
 
-      <span class="mr-2">HaaS - Previas</span>
+      <span class="mr-2">HaaS - Previas</span>  
     </div>
 
     <v-spacer></v-spacer>

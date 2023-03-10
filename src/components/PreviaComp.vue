@@ -6,15 +6,21 @@
             <v-card-title>
                 Previa: {{ getPrevia[0].id }}
     
-            <v-spacer></v-spacer>
-    
-            <router-link to="/">Voltar</router-link>
+                <v-spacer></v-spacer>
+        
+                <v-btn
+                    color=primary
+                    to="/"
+                >
+                    Voltar
+                </v-btn>
             </v-card-title><!-- /Titulo da tabela -->
     
             <!-- Body da tabela -->
             <v-data-table
                 :headers="getHeadersFaturamentoSemAcoes"
                 :items="getPrevia"
+                :hide-default-footer="true"
             >
             <!-- Regra Cobranca -->
             <template v-slot:[getRegraCobranca]="{ item }">
@@ -47,15 +53,30 @@
         <v-card>
             <!-- Titulo da tabela -->
             <v-card-title>
-                Itens Faturados    
+                Itens Faturados
+
                 <v-spacer></v-spacer>
-                Total:
+
+                <v-text-field
+                    v-model="search"
+                    append-icon="mdi-magnify"
+                    label="Buscar"
+                    single-line
+                    hide-details
+                    dark
+                ></v-text-field>
+
+                <v-spacer></v-spacer>
+
+                Total: {{ faturamentosItem.length }}
             </v-card-title><!-- /Titulo da tabela -->
     
             <!-- Body da tabela -->
             <v-data-table
+                :search="search"
                 :headers="getHeadersFaturamentoItem"
-                :items="getFaturamentoItem"
+                :items="faturamentosItem"
+                :sort-by="'item_configuracao'"
             >
         </v-data-table><!-- /Body da tabela -->
         </v-card>
@@ -63,17 +84,24 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 
 export default {
     name: 'PreviaView',
 
+    data() {
+        return {
+            search: "",
+        }
+    },
+
     computed: {
+        ...mapState([ 'faturamentosItem' ]),
+
         ...mapGetters([
             "getHeadersFaturamentoSemAcoes",
             "getHeadersFaturamentoItem",
             "getPrevia",
-            "getFaturamentoItem",
             "getRegraCobranca",
             "getMesReferencia"
       ])
@@ -96,3 +124,12 @@ export default {
 
 }
 </script>
+
+<style scoped>
+.v-card {
+    background-color: grey;
+    color: white;
+}
+
+
+</style>

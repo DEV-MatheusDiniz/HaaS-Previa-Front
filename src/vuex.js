@@ -11,7 +11,7 @@ const store = new Vuex.Store({
 
     previa: [],
 
-    faturamentoItem: [],
+    faturamentosItem: [],
 
     headersFaturamento: [
       { text: "Código", value: "id" },
@@ -25,15 +25,15 @@ const store = new Vuex.Store({
     ],
 
     headersFaturamentoItem: [
-      { text: "Descrição", value: "" },
-      { text: "Quantidade do grupo de IC's na Infraestrutura", value: "" },
-      { text: "Relevância (Vlr)", value: "" },
-      { text: "Relevância (%)", value: "" },
-      { text: "Diversidade (Vlr)", value: "" },
-      { text: "Diversidade (%)", value: "" },
-      { text: "Quantidade de US's estimada para consumo unitário", value: "" },
-      { text: "Quantidade de US's estimada para consumo por grupo de IC's", value: "" },
-      { text: "Valor mensal para a sustentação do Item", value: "" },
+      { text: "Descrição", value: "item_configuracao" },
+      { text: "Quantidade do grupo de IC's na Infraestrutura", value: "qt_contabilizado" },
+      { text: "Relevância (Vlr)", value: "nu_relevancia" },
+      { text: "Relevância (%)", value: "vl_relevancia" },
+      { text: "Diversidade (Vlr)", value: "nu_diversidade" },
+      { text: "Diversidade (%)", value: "vl_diversidade" },
+      { text: "Quantidade de US's estimada para consumo unitário", value: "vl_item" },
+      { text: "Quantidade de US's estimada para consumo por grupo de IC's", value: "vl_total_item" },
+      { text: "Valor mensal para a sustentação do Item", value: "vl_total_faturado" },
     ]
   },
 
@@ -58,8 +58,8 @@ const store = new Vuex.Store({
       return state.headersFaturamentoItem;
     },
 
-    getFaturamentoItem(state) {
-      return state.faturamentoItem;
+    getFaturamentosItem(state) {
+      return state.faturamentosItem;
     },
 
     getRegraCobranca() {
@@ -76,6 +76,7 @@ const store = new Vuex.Store({
   },
 
   actions: {
+    // GET Faturamentos
     previasAction({ commit }) {
       api
         .get('faturamentos/')
@@ -87,15 +88,17 @@ const store = new Vuex.Store({
         });
     },
 
+    // GET Previa
     previaAction({ commit }, id) {
       commit('previaMutation', id)
     },
 
-    faturamentoItemAction({ commit }){
+    // GET Faturamentos Item
+    faturamentosItemAction({ commit }, id){
       api
-        .get('faturamentosItem/')
+        .get('faturamentosItem/'+id)
         .then(response => {
-          commit('faturamentoItemMutation', response.data)
+          commit('faturamentosItemMutation', response.data)
         })
         .catch((error) => {
           console.log(error);
@@ -144,11 +147,12 @@ const store = new Vuex.Store({
     },
 
     previaMutation(state, id) {
-      state.previa = state.previas.filter(previa => previa.id == id)
+      state.previa = state.previas.filter(previa => previa.id == id);
     },
 
-    faturamentoItemMutation(state, faturamentosItem) {
-      state.faturamentoItem = faturamentosItem
+    faturamentosItemMutation(state, data) {
+      state.faturamentosItem = data;
+      console.log(data)
     }
   },
   

@@ -48,7 +48,7 @@
         <router-link to="/previa">
           <v-icon
             small
-            @click="previaAction(item.id)"
+            @click="previaAction(item.id), faturamentosItemAction(item.id)"
           >
             mdi-eye
           </v-icon>
@@ -96,6 +96,7 @@ export default {
         ...mapActions([
             "previasAction",
             "previaAction",
+            "faturamentosItemAction"
         ]),
         getCorRegraCobranca(regraCobranca) {
             if (regraCobranca == "APLICADA")
