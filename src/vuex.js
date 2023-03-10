@@ -152,7 +152,6 @@ const store = new Vuex.Store({
 
     faturamentosItemMutation(state, data) {
       state.faturamentosItem = data;
-      console.log(data)
     }
   },
   
