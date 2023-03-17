@@ -5,18 +5,25 @@ Vue.use(VueRouter)
 
 const routes = [
 
-  // Previas
+  // Faturamento Previas
   {
     path: '/',
     name: 'Previas',
     component: () => import('../views/PreviasView.vue')
   },
 
-  // Previa
+  // Faturamento Previa
   {
-    path: '/previa',
+    path: '/previa/:idPrevia',
     name: 'Previa',
     component: () => import('../views/PreviaView.vue')
+  },
+
+  // Faturamento Item Conteudo
+  {
+    path: '/faturamentoItemConteudo/:idItem',
+    name: 'FaturamentoItemConteudo',
+    component: () => import('../views/FaturamentoItemConteudoView.vue')
   },
 
 ]
