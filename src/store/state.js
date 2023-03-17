@@ -1,10 +1,14 @@
 const state = {
 
-    previas: [],
+    previas: {},
 
     previa: [],
 
-    faturamentosItem: [],
+    faturamentosItem: {},
+
+    faturamentoItem: [],
+
+    faturamentosItemConteudo: [],
 
     headersFaturamento: [
       { text: "Código", value: "id" },
@@ -27,6 +31,7 @@ const state = {
       { text: "Quantidade de US's estimada para consumo unitário", value: "vl_item" },
       { text: "Quantidade de US's estimada para consumo por grupo de IC's", value: "vl_total_item" },
       { text: "Valor mensal para a sustentação do Item", value: "vl_total_faturado" },
+      { text: "Ações", value: "acoes" },
     ],
 
 }

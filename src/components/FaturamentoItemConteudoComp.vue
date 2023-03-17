@@ -1,0 +1,74 @@
+<template>
+    <div>
+        <!-- Previa -->
+        <TabelaComp
+            :titulo="'Previa: ' + getPrevia.id"
+            :qtdItems="getPrevia.qtdItems"
+            :headers="getHeadersFaturamentoSemAcoes"
+            :items="getPrevia.items"
+            :btnHeader="btnHeader"
+            :footer="true"
+        />
+
+        <br>
+
+        <!-- Item de Configuração -->
+        <TabelaComp
+            :qtdItems="getFaturamentoItem.qtdItems"
+            :titulo="'Item de Configuração: ' + getFaturamentoItem.nome"
+            :headers="getHeadersFaturamentoItemSemAcoes"
+            :items="getFaturamentoItem.items"
+            :footer="true"
+        />
+
+        <!-- Faturamento Item Conteudo -->
+        
+    </div>
+</template>
+
+<script>
+import { mapActions, mapGetters } from 'vuex';
+import TabelaComp from './TabelaComp';
+
+export default {
+    name: 'FaturamentoItemConteudoComp',
+
+    components: {
+        TabelaComp
+    },
+
+    mounted() {
+        this.faturamentoItemAction(this.idItem)
+        // this.faturamentosItemConteudoAction(this.idUrl)
+    },
+
+    data() {
+        return {
+            headersFaturamentoItemConteudo: [
+                { text: "id", value: "id" },
+            ],
+
+            idItem: this.$route.params.idItem,
+
+            btnHeader: { color: 'primary', text: "Voltar", to: '/', icon: "mdi-undo-variant" },
+        }
+    },
+
+    computed: {
+        ...mapGetters([
+            "getHeadersFaturamentoSemAcoes",
+            "getHeadersFaturamentoItemSemAcoes",
+            "getPrevia",
+            "getFaturamentoItem",
+            "getFaturamentosItemConteudo",
+        ])
+    },
+
+    methods: {
+        ...mapActions([
+            "faturamentosItemConteudoAction",
+            "faturamentoItemAction",
+        ])
+    }
+}
+</script>

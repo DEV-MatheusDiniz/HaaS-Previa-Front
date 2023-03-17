@@ -2,23 +2,28 @@ const mutations = {
 
     // Previas
     previasMutation(state, previas) {
-      previas.map((previa) => {
-        // Visualizar
-        previa.acoes = previa.id
-      });
-
       state.previas = previas;
     },
 
     // Previa
-    previaMutation(state, id) {
-      state.previa = state.previas.filter(previa => previa.id == id);
+    previaMutation(state, previa) {
+      state.previa = previa;
     },
 
     // Faturamento Item
-    faturamentosItemMutation(state, data) {
-      state.faturamentosItem = data;
-    }
+    faturamentosItemMutation(state, faturamentosItem) {
+      state.faturamentosItem = faturamentosItem;
+    },
+
+    // Faturamento Item
+    faturamentoItemMutation(state, item) {
+      state.faturamentoItem = item;
+    },
+
+    // faturamentos Item Conteudo
+    faturamentosItemConteudoMutation(state, itemConteudo) {
+      state.faturamentosItemConteudo = itemConteudo;
+    },
 
 }
 

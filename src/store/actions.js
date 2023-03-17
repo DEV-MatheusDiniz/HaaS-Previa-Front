@@ -17,15 +17,46 @@ const actions = {
 
     // GET Previa
     previaAction({ commit }, id) {
-      commit('previaMutation', id)
+      api
+        .get('faturamentos/one/' + id)
+        .then((response) => {
+          commit('previaMutation', response.data)
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
 
-    // GET Faturamentos Item
-    faturamentosItemAction({ commit }, id){
+    // GET Faturamentos Items
+    faturamentosItemAction({ commit }, idPrevia){
       api
-        .get('faturamentosItem/'+id)
+        .get('faturamentosItem/' + idPrevia)
         .then(response => {
           commit('faturamentosItemMutation', response.data)
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+
+    // GET Faturamento Item
+    faturamentoItemAction({ commit }, idItem) {
+      api
+        .get('faturamentosItem/one/' + idItem)
+        .then(response => {
+          commit('faturamentoItemMutation', response.data)
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+
+    // GET Faturamento Item Conteudo
+    faturamentosItemConteudoAction({ commit }, id){
+      api
+        .get('faturamentoItemConteudo/' + id)
+        .then(response => {
+          commit('faturamentosItemConteudoMutation', response.data)
         })
         .catch((error) => {
           console.log(error);

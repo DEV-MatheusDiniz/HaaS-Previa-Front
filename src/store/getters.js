@@ -10,6 +10,16 @@ const getters = {
       return state.previa;
     },
 
+    // Faturamento Item
+    getFaturamentoItem(state) {
+      return state.faturamentoItem;
+    },
+
+    // Faturamento Item Conteudo
+    getFaturamentosItemConteudo(state) {
+      return state.faturamentosItemConteudo;
+    },
+
     // Headers Faturamento
     getHeadersFaturamento(state) {
       return state.headersFaturamento;
@@ -23,6 +33,11 @@ const getters = {
     // Headers Faturamento Item
     getHeadersFaturamentoItem(state) {
       return state.headersFaturamentoItem;
+    },
+
+    // Headers Faturamento Item Sem Acoes
+    getHeadersFaturamentoItemSemAcoes(state) {
+      return state.headersFaturamentoItem.filter(item => item.value != 'acoes');
     },
 
     // Faturamentos Item
