@@ -1,10 +1,13 @@
 <template>
   <TabelaComp
-    :titulo="'Previas: ' + getPrevias.length"
+    :titulo="'Previas: ' + getPrevias.qtdItems"
+    :qtdItems="getPrevias.qtdItems"
     :headers="getHeadersFaturamento"
-    :items="getPrevias"
+    :items="getPrevias.items"
     :btnHeader="btnHeader"
+    :toVisualizar="'/previa'"
   />
+  <!-- previaAction(item.id), faturamentosItemAction(item.id) -->
 </template>
 
 <script>
@@ -24,7 +27,7 @@ export default {
 
     data() {
         return {
-          btnHeader: { color: 'success', text: "Nova Previa"}
+          btnHeader: { color: 'success', text: "Nova Previa"},
         };
     },
 
@@ -38,6 +41,7 @@ export default {
     methods: {
         ...mapActions([
             "previasAction",
+            "previaAction",
         ]),
     },
 
