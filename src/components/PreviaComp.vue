@@ -1,27 +1,32 @@
 <template>
     <div>
+        <!-- Previa -->
         <TabelaComp
-            :titulo="'Previa: ' + getPrevia[0].id"
+            :titulo="'Previa: ' + getPrevia.id"
+            :qtdItems="getPrevia.qtdItems"
             :headers="getHeadersFaturamentoSemAcoes"
-            :items="getPrevia"
+            :items="getPrevia.items"
             :btnHeader="btnHeader"
             :footer="true"
         />
 
         <br>
 
+        <!-- Faturamentos Items -->
         <TabelaComp
             :titulo="'Itens Faturados'"
+            :qtdItems="getFaturamentosItem.qtdItems"
             :headers="getHeadersFaturamentoItem"
-            :items="getFaturamentosItem"
-            :subtitulo="'Total:' + getFaturamentosItem.length"
+            :items="getFaturamentosItem.items"
+            :subtitulo="'Total:' + getFaturamentosItem.qtdItems"
             :ordenacao="'item_configuracao'"
+            :toVisualizar="'/faturamentoItemConteudo'"
         />
     </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import TabelaComp from './TabelaComp';
 
 export default {
@@ -31,9 +36,17 @@ export default {
         TabelaComp,
     },
 
+    mounted() {
+        this.previaAction(this.idPrevia),
+        
+        this.faturamentosItemAction(this.idPrevia)
+    },
+
     data() {
         return {
             btnHeader: { color: 'primary', text: 'Voltar', to: '/', icon: "mdi-undo-variant" },
+
+            idPrevia: this.$route.params.idPrevia,
         }
     },
 
@@ -45,6 +58,13 @@ export default {
             "getPrevia",
       ])
     },
+
+    methods: {
+        ...mapActions([
+            "previaAction",
+            "faturamentosItemAction"
+        ])
+    }
 
 }
 </script>
