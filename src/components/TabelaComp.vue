@@ -7,7 +7,7 @@
           <v-spacer></v-spacer>
 
           <v-text-field
-            v-if="items.length > 1"
+            v-if="qtdItems > 1"
             v-model="search"
             append-icon="mdi-magnify"
             label="Buscar"
@@ -63,10 +63,9 @@
 
             <!-- Ações -->
             <template v-slot:[getAcoes]="{ item }">
-                <router-link to="/previa">
+                <router-link :to="toVisualizar + '/' + item.id">
                   <v-icon
                     small
-                    @click="previaAction(item.id), faturamentosItemAction(item.id)"
                   >
                     mdi-eye
                   </v-icon>
@@ -77,7 +76,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
     name: 'TabelaComp',
@@ -89,7 +88,9 @@ export default {
         items: Array,
         btnHeader: Object,
         footer: Boolean,
-        ordenacao: String
+        ordenacao: String,
+        toVisualizar: String,
+        qtdItems: Number
     },
 
     data() {
@@ -102,16 +103,11 @@ export default {
         ...mapGetters([
             "getRegraCobranca",
             "getMesReferencia",
-            "getAcoes"
+            "getAcoes",
         ])
     },
 
     methods: {
-        ...mapActions([
-            "previaAction",
-            "faturamentosItemAction"
-        ]),
-
         getCorRegraCobranca(regraCobranca) {
             if (regraCobranca == "APLICADA")
                 return "orange";
