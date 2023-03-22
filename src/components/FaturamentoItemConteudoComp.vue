@@ -20,8 +20,16 @@
             :items="getFaturamentoItem.items"
             :footer="true"
         />
+        
+        <br>
 
         <!-- Faturamento Item Conteudo -->
+        <TabelaAbasComp
+         :titulo="'Total: '"
+         :items="getFaturamentosItemConteudo.items"
+         :headers="getFaturamentosItemConteudo.headers"
+
+        />
         
     </div>
 </template>
@@ -29,17 +37,19 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import TabelaComp from './TabelaComp';
+import TabelaAbasComp from './TabelaAbasComp';
 
 export default {
     name: 'FaturamentoItemConteudoComp',
 
     components: {
-        TabelaComp
+        TabelaComp,
+        TabelaAbasComp
     },
 
     mounted() {
-        this.faturamentoItemAction(this.idItem)
-        // this.faturamentosItemConteudoAction(this.idUrl)
+        this.faturamentoItemAction(this.idItem),
+        this.faturamentosItemConteudoAction(this.idItem)
     },
 
     data() {
